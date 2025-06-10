@@ -1,6 +1,6 @@
 <script>
 try {
-    var exp = 'test domain<script>history.replaceState("","","blob:'+location.protocol+'//test.domain.com'+'@'+location.host+'/")</script>';
+    var exp = 'test domain <script>try {history.replaceState("","","blob:'+location.protocol+'//test.domain.com'+'@'+location.host+'/")} catch (e) {alert("Ошибка выполнения: " + e);}<\/script>';
     location = URL.createObjectURL(new Blob([exp], {type: "text/html"}))
 } catch (e) {
     alert("Ошибка выполнения: " + e);
